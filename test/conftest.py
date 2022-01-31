@@ -56,7 +56,6 @@ def test_user(client):
 def token(test_user):
     return create_access_token({'user_id': test_user['id']})
 
-
 @pytest.fixture
 def authorized_client(client, token):
     client.headers = {
@@ -95,7 +94,7 @@ def test_posts(test_user, session):
 
     session.add_all(posts)
     # session.add_all([models.Post(title="first title", content="first content", owner_id=test_user['id']),
-    #                 models.Post(title="2nd title", content="2nd content", owner_id=test_user['id']), models.Post(title="3rd title", content="3rd content", owner_id=test_user['id'])])
+    #                 models.Post(title="2nd title", content="2nd content", owner_id=test_user['id'])])
     session.commit()
 
     posts = session.query(models.Post).all()
