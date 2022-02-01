@@ -45,7 +45,7 @@ def client(session):
 def test_user(client):
     user_data = {'email': 'aaa@gmail.com',
                  'password': 'asswecan'}
-    res = client.post("/user/", json=user_data)
+    res = client.post("/users/", json=user_data)
     assert res.status_code == 201
     new_user = res.json()
     new_user['password'] = user_data['password']
@@ -55,6 +55,7 @@ def test_user(client):
 @pytest.fixture
 def token(test_user):
     return create_access_token({'user_id': test_user['id']})
+
 
 @pytest.fixture
 def authorized_client(client, token):

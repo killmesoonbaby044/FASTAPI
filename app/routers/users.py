@@ -4,7 +4,7 @@ from app import models, schemas, oauth2, utils
 from app.database import get_db
 
 router = APIRouter(
-    prefix='/user',
+    prefix='/users',
     tags=['Users']
 )
 

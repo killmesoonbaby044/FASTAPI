@@ -7,7 +7,7 @@ from app.config import settings
 
 def test_create_user(client):
     res = client.post(
-        "/user/", json={
+        "/users/", json={
             "email": "dd@gmail.com", "password": "asswecan"
         }
     )

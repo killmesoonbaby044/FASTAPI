@@ -12,7 +12,7 @@ router = APIRouter(
 
 
 # @router.get('', response_model=List[schemas.Post])
-@router.get('', response_model=List[schemas.PostOut])
+@router.get('/', response_model=List[schemas.PostOut])
 def get_posts(db: Session = Depends(get_db), current_user=Depends(oauth2.get_current_user),
               search: Optional[str] = "", skip: int = 0, limit: int = 10):
     # posts = db.query(models.Post).filter(models.Post.owner_id == current_user.id).all()
@@ -42,7 +42,7 @@ def get_post(id: int, db: Session = Depends(get_db), current_user=Depends(oauth2
     return one_post
 
 
-@router.post('', status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
+@router.post('/', status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
 def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db),
                  current_user=Depends(oauth2.get_current_user)):
 
