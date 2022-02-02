@@ -8,14 +8,14 @@ from app.config import settings
 def test_create_user(client):
     res = client.post(
         "/users/", json={
-            "email": "dd@gmail.com", "password": "asswecan"
+            "email": "dd@gmail.com", "password": "password123"
         }
     )
     new_user = schemas.UserOut(**res.json())
     assert new_user.email == 'dd@gmail.com'
     assert res.status_code == 201
 
-    res = client.get(f"/user/{new_user.id}")
+    res = client.get(f"/users/{new_user.id}")
     assert res.status_code == 200
     data = res.json()
     assert data["email"] == "dd@gmail.com"
@@ -39,10 +39,10 @@ def test_login(client, test_user):
 
 
 @pytest.mark.parametrize("email, password, status_code", [
-    ('wrongemail@gmail.com', 'asswecan', 403),
+    ('wrongemail@gmail.com', 'password123', 403),
     ('aaa@gmail.com', 'wrongpassword', 403),
     ('wrongemail@gmail.com', 'wrongpassword', 403),
-    (None, 'asswecan', 422),
+    (None, 'password123', 422),
     ('aaa@gmail.com', None, 422)
 ])
 def test_incorrect_login(test_user, client, email, password, status_code):

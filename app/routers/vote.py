@@ -32,7 +32,7 @@ def create_user(vote: schemas.Vote, db: Session = Depends(get_db),
         if not found_vote:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Vote does not exist")
 
-    vote_query.delete()
-    db.commit()
+        vote_query.delete()
+        db.commit()
+        return {'message': "successfully deleted vote"}
 
-    return {'message': "successfully deleted vote"}

@@ -10,7 +10,7 @@ from app.first import app
 from app.oauth2 import create_access_token
 
 SQLALCHEMY_DATABASE_URL = f'postgresql://{settings.database_username}:{settings.database_password}'\
-                          f'@{settings.database_hostname}:{settings.database_port}/fastapi_test'
+                          f'@{settings.database_hostname}:{settings.database_port}/{settings.database_name}_test'
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -44,7 +44,7 @@ def client(session):
 @pytest.fixture
 def test_user(client):
     user_data = {'email': 'aaa@gmail.com',
-                 'password': 'asswecan'}
+                 'password': 'password123'}
     res = client.post("/users/", json=user_data)
     assert res.status_code == 201
     new_user = res.json()
@@ -55,7 +55,7 @@ def test_user(client):
 @pytest.fixture
 def test_user2(client):
     user_data = {'email': 'bbb@gmail.com',
-                 'password': 'asswecan'}
+                 'password': 'password123'}
     res = client.post("/users/", json=user_data)
     assert res.status_code == 201
     new_user = res.json()
@@ -64,12 +64,8 @@ def test_user2(client):
 
 
 @pytest.fixture
-def token(test_user):
-    return create_access_token({'user_id': test_user['id']})
-
-
-@pytest.fixture
-def authorized_client(client, token):
+def authorized_client(client, test_user):
+    token = create_access_token({'user_id': test_user['id']})
     client.headers = {
         **client.headers,
         "Authorization": f"Bearer {token}"
