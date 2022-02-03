@@ -27,4 +27,4 @@ app.include_router(vote.router)
 
 @app.get('/')
 def hello():
-    return {'message': 'hello people on heroku stage'}
+    return {'message': 'hello people on heroku on the last stage'}
