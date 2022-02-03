@@ -93,4 +93,4 @@ jobs:
           script: |
             cd app/src
             git pull
-            sudo systemctl restar api
+            sudo systemctl restart api
