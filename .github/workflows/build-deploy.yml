@@ -3,7 +3,7 @@ name: Build and Deploy Code
 on: [push, pull_request]
 
 jobs:
-  buid:
+  build:
     environment: FASTAPI_TEST
     env:
       DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
