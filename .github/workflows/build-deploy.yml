@@ -91,6 +91,10 @@ jobs:
           username: ${{secrets.PROD_USERNAME}}
           password: ${{secrets.PROD_PASSWORD}}
           script: |
+            echo "hello on ubuntu"
             cd app/src
+            echo "1"
             git pull
+            echo "2"
             sudo systemctl restart api
+            echo "done"
