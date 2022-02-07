@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import users, post, auth, vote
+from app.routers import users, post, auth, vote, random
 from fastapi.middleware.cors import CORSMiddleware
 # from database import engine
 # import models
@@ -23,6 +23,7 @@ app.include_router(users.router)
 app.include_router(post.router)
 app.include_router(auth.router)
 app.include_router(vote.router)
+app.include_router(random.router)
 
 
 @app.get('/')
