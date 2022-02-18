@@ -1,12 +1,6 @@
-from fastapi import Response, status, HTTPException, Depends, APIRouter
-from sqlalchemy.orm import Session
-from sqlalchemy import func
-from typing import List, Optional
+from fastapi import status, APIRouter
 from fastapi.responses import RedirectResponse
 
-
-from app import models, schemas, oauth2
-from app.database import get_db
 
 router = APIRouter(
     prefix='/random',
@@ -19,6 +13,6 @@ def redirect_typer():
     return RedirectResponse("/")
 
 
-@router.get("/2", response_class=RedirectResponse)
-async def redirect_fastapi():
-    return "/"
+@router.get("/2", response_class=RedirectResponse, status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+def redirect_fastapi():
+    return
